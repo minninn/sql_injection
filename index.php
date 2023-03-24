@@ -83,5 +83,6 @@
         echo "<script>alert('Success!');</script>";
     };
 
-    echo "<input type='button' onclick=window.open('./source.html') value='source'>";
+    //view source
+    //echo "<input type='button' onclick=window.open('./source.html') value='source'>";
 ?>
