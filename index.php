@@ -84,5 +84,5 @@
     };
 
     //view source
-    //echo "<input type='button' onclick=window.open('./source.html') value='source'>";
+    echo "<input type='button' onclick=window.open('./source.html') value='source'>";
 ?>
