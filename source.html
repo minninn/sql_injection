@@ -1,0 +1,93 @@
+<html>
+<body>
+
+<p>&lt;?php</p>
+<p>    $conn = mysqli_connect(</p>
+<p>        'localhost', </p>
+<p>        'root',</p>
+<p>        '1234',</p>
+<p>        'test_db'</p>
+<p>    );</p>
+<p>    </p>
+<p>    echo "&lt;h3&gt;Delete All Comments!</h3>";</p>
+<p>    </p>
+<p>    if( isset( $_POST['insert'] ) ) {</p>
+<p>        $name = trim( $_POST['name'] );</p>
+<p>        $comment = trim( $_POST['comment'] );</p>
+<p>        $password = trim( $_POST['insert_pw'] );</p>
+<p></p>
+<p>        if( $name != '' && $comment != '' ) {</p>
+<p>            $sql_getNum = "SELECT COUNT( number ) FROM test_table";</p>
+<p>            $result = mysqli_query( $conn, $sql_getNum );</p>
+<p>            $count = mysqli_fetch_array( $result )[0];</p>
+<p>            $count++;</p>
+<p></p>
+<p>            $sql_insert = "INSERT INTO test_table( number, name, password, comment ) VALUES( '$count', '$name', '$password', '$comment' );";</p>
+<p>            $result = mysqli_query( $conn, $sql_insert );</p>
+<p>        };</p>
+<p>    };</p>
+<p></p>
+<p>    if( isset( $_POST['delete'] ) ) {</p>
+<p>        $del_number = trim( $_POST['del_num'] );</p>
+<p>        $password = trim( $_POST['delete_pw'] );</p>
+<p>        $sql = "SELECT password FROM test_table WHERE number = '$del_number';";</p>
+<p>        $result = mysqli_query( $conn, $sql );</p>
+<p>        $conf_pw = mysqli_fetch_array( $result )[0];</p>
+<p></p>
+<p>        if( $del_number == 1 || $del_number == 2 ) {</p>
+<p>            echo "&lt;script&gt;alert('Not Allowed!');</script>";</p>
+<p>        } else {</p>
+<p>            if( $password == $conf_pw ) {</p>
+<p>                $sql_delete = "DELETE FROM test_table WHERE number = '$del_number';";</p>
+<p>                $result = mysqli_query( $conn, $sql_delete );</p>
+<p>            } else {</p>
+<p>                echo "&lt;script&gt;alert('Check Password');</script>";</p>
+<p>            };</p>
+<p>        };</p>
+<p>    };</p>
+<p>    </p>
+<p>    if( isset( $_POST['reset'] ) ) {</p>
+<p>        $reset = trim( $_POST['reset'] );</p>
+<p></p>
+<p>        $sql_clear = "DELETE FROM test_table;";</p>
+<p>        $result = mysqli_query( $conn, $sql_clear );</p>
+<p>        $sql_clear = "INSERT INTO test_table ( number, name, password, comment ) VALUES ( 1, 'admin', '6BFCC4026B5F162799A6DC8305C09DB9C1674AC616BD5C7', 'First Comment' );";</p>
+<p>        $result = mysqli_query( $conn, $sql_clear );</p>
+<p>        $sql_clear = "INSERT INTO test_table ( number, name, password, comment ) VALUES ( 2, 'user1', 'B6D0816AC163047C47A1F426F4F4C6B5B5042C671EABC4FDC7310FD5B183EEF59DC274604', 'This is test message' );";</p>
+<p>        $result = mysqli_query( $conn, $sql_clear );</p>
+<p>    };</p>
+<p></p>
+<p>    </p>
+<p>    echo "&lt;form name='data' method='post'&gt;";</p>
+<p>    echo "&lt;input type='text' name='name' placeholder='name'&gt;";</p>
+<p>    echo "&lt;input type='password' name='insert_pw' placeholder='password'&gt;";</p>
+<p>    echo "&lt;input type='text' name='comment' placeholder='comment'&gt;";</p>
+<p>    echo "&lt;button type='submit' name='insert' value='insert'&gt;submit</button></form>$nbsp$nbsp";</p>
+<p>    echo "&lt;form name='clear' method='post'&gt;";</p>
+<p>    echo "&lt;input type='text' name='del_num' placeholder='number'&gt;";</p>
+<p>    echo "&lt;input type='password' name='delete_pw' placeholder='password'&gt;";</p>
+<p>    echo "&lt;button type='submit' name='delete' value='delete'&gt;delete</button>";</p>
+<p>    echo "&nbsp&nbsp&nbsp&nbsp&lt;button type='submit' name='reset' value='rst'&gt;reset database</button></form><br>";</p>
+<p>    echo "No.&nbsp&nbspName&nbsp&nbsp&nbsp&nbsp&nbspComments";</p>
+<p></p>
+<p>    $sql = "SELECT * FROM test_table";</p>
+<p>    $result = mysqli_query( $conn, $sql );</p>
+<p> </p>
+<p>    echo "&lt;form name='field'&gt;";</p>
+<p>    while( $row = mysqli_fetch_array( $result ) ) {</p>
+<p>        echo $row['number'].'&nbsp&nbsp&nbsp&nbsp&nbsp'.$row['name'].'&nbsp&nbsp&nbsp&nbsp&nbsp'.$row['comment'].'&lt;br&gt;';</p>
+<p>    };</p>
+<p>    echo "&lt;/form&gt;";</p>
+<p></p>
+<p>    $sql = "SELECT COUNT( number ) FROM test_table;";</p>
+<p>    $result = mysqli_query( $conn, $sql );</p>
+<p></p>
+<p>    if( mysqli_fetch_array( $result )[0] == 0 ) {</p>
+<p>        echo "&lt;script&gt;alert('Success!');</script>";</p>
+<p>    };</p>
+<p></p>
+<p>    echo "&lt;input type='button' onclick=window.open('http://localhost:8088/DVWA') value='source'&gt;";</p>
+<p>?&gt;</p>
+
+</body>
+</html>
