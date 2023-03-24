@@ -82,4 +82,6 @@
     if( mysqli_fetch_array( $result )[0] == 0 ) {
         echo "<script>alert('Success!');</script>";
     };
+
+    echo "<input type='button' onclick=window.open('./source.html') value='source'>";
 ?>
