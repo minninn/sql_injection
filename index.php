@@ -80,7 +80,7 @@
     $result = mysqli_query( $conn, $sql );
 
     if( mysqli_fetch_array( $result )[0] == 0 ) {
-        echo "<script>alert('Success!');</script>";
+        echo "<script>alert('Get hack_this.text from database!');</script>";
     };
 
     //view source
